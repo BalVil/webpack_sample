@@ -1,17 +1,20 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   //   mode: "development",
-  entry: "./src/index.js",
+  devtool: "eval-source-map",
+
+  entry: { main: path.resolve(__dirname, "./src/index.js") },
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "./dist"),
+    filename: "[name].bundle.js",
   },
   module: {
     rules: [
       {
-        test: /\.scss$/i,
+        test: /\.(scss|css)$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
@@ -19,12 +22,30 @@ module.exports = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg)$/,
+        type: "asset/inline",
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg|webp|svg)$/i,
+        type: "asset/resource",
+      },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "src/index.html" })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "./src/index.html"),
+      filename: "index.html",
+      title: "My App",
+      inject: "body",
+    }),
+    new CleanWebpackPlugin(),
+  ],
   devServer: {
-    port: 4040,
+    historyApiFallback: true,
     open: true,
     compress: true,
+    hot: true,
+    port: 4040,
   },
 };

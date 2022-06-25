@@ -1,6 +1,5 @@
 import name from "./module";
-import "./styles/common.scss";
+import "./styles/example.scss";
 
 console.log(name);
-
 console.log("Hello!");

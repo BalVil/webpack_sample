@@ -4,7 +4,6 @@
   "description": "Webpack starter",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --mode=development",
     "dev": "webpack-dev-server --mode=development",
     "prod": "webpack --mode=production"
   },

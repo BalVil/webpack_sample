@@ -1,7 +1,7 @@
 {
   "name": "webpack_sample",
   "version": "1.0.0",
-  "description": "Webpack starter",
+  "description": "Webpack TODO",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode=development",
